@@ -1,0 +1,56 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "node -r dotenv/config ./scripts/seed.js"
+  },
+  "dependencies": {
+    "@auth/firebase-adapter": "^1.0.3",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tremor/react": "^3.10.0",
+    "@types/js-cookie": "^3.0.5",
+    "@types/node": "20.8.9",
+    "@types/react": "18.2.33",
+    "@types/react-dom": "18.2.14",
+    "@vercel/analytics": "^1.1.1",
+    "autoprefixer": "^10.4.16",
+    "eslint": "8.52.0",
+    "eslint-config-next": "14.0.0",
+    "firebase-admin": "^11.11.0",
+    "js-cookie": "^3.0.5",
+    "next": "14.0.0",
+    "next-auth": "5.0.0-beta.4",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "prop-types": "^15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "server-only": "^0.0.1",
+    "tailwindcss": "^3.3.5",
+    "typescript": "5.2.2",
+    "use-debounce": "^10.0.0",
+    "zod": "^3.22.4"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.14",
+    "dotenv": "^16.3.1",
+    "nodemailer": "^6.9.7",
+    "ts-node": "^10.9.1"
+  },
+  "browser": {
+    "crypto": false
+  },
+  "packageManager": "yarn@4.0.1"
+}
