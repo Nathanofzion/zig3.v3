@@ -69,8 +69,12 @@
     "soroswap-router-sdk": "^1.2.4",
     "swr": "^2.2.0",
     "typescript": "5.3.3",
-    "use-resize-observer": "^9.1.0"
+    "use-resize-observer": "^9.1.0",
+    "passkey-kit": "^0.6.1"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@lingui/macro": "^4.3.0",
     "@testing-library/react": "^14.1.2",
