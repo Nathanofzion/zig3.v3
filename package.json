@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.ts\" \"pages/**/*.ts\"",
-    "wdio": "exec wdio run ./wdio.conf.ts --watch"
+    "wdio": "exec wdio run ./wdio.conf.ts --watch",
+    "postinstall": "yarn --cwd packages/tailwind-firebase-nextjs-referrel-system install"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
