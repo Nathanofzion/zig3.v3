@@ -17,6 +17,10 @@ import { isConnected as isConnectedLobstr } from '@lobstrco/signer-extension-api
 
 import { Connector } from '@soroban-react/types';
 
+import base64url from 'base64url';
+import { account, getContractId } from 'lib/passkeyClient';
+import passkeyImage from '/src/assets/images/passkey.png';
+
 const Title = styled('div')`
   font-size: 24px;
   font-weight: 500;
@@ -185,6 +189,21 @@ const ConnectWalletContent = ({
     }
   };
 
+  const handlePasskeyLogin = async () => {
+    try {
+      const { keyId: kid, contractId: cid } = await account.connectWallet({
+        getContractId,
+      });
+
+      const keyId_base64url = base64url(kid);
+
+      // keyId.set(keyId_base64url);
+      // contractId.set(cid);
+    } catch (err) {
+       
+    }
+  }
+
   useEffect(() => {
     const newWalletsStatus = walletsStatus.map(async (walletStatus) => {
       if (walletStatus.name === 'freighter') {
@@ -258,6 +277,18 @@ const ConnectWalletContent = ({
                 </WalletBox>
               );
             })}
+            <WalletBox onClick={handlePasskeyLogin}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Image
+                  src={passkeyImage.src}
+                  width={24}
+                  height={24}
+                  alt='passkey'
+                  style={{ borderRadius: 6 }}
+                />
+                <span>PasskeyID Wallet</span>
+              </div>
+            </WalletBox>
           </ContentWrapper>
           {/* TODO: add link to terms of service */}
           <FooterText isMobile={isMobile}>
