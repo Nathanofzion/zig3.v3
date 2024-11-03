@@ -41,6 +41,7 @@
     "@types/react-window": "^1.8.5",
     "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.2",
+    "base64url": "^3.0.1",
     "bigint-conversion": "^2.4.3",
     "bignumber.js": "^9.1.0",
     "bowser": "^2.11.0",
