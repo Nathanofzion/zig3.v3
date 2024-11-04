@@ -140,14 +140,19 @@ export const HeaderChip = ({
       {chains ?
         (
           <>
-            <Chip
+            {/* <Chip
               onClick={handleDropdownClick}
               sx={profileChipStyle}
               label={label}
               {...rest}
+            /> */}
+            <Chip
+              sx={profileChipStyle}
+              label={"Rewards"}
+              {...rest}
             />
 
-            <StyledMenu
+            {/* <StyledMenu
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -166,17 +171,22 @@ export const HeaderChip = ({
                 <MenuItem key={chain.id} onClick={() => changeActiveChain(chain)}>{chain.name}</MenuItem>
               ))
               }
-            </StyledMenu>
+            </StyledMenu> */}
           </>)
         :
         (<>
-          <Chip
+          {/* <Chip
             onClick={canDisconnect ? handleDropdownClick : onClick}
             sx={profileChipStyle}
             label={label}
             {...rest}
+          /> */}
+          <Chip
+            sx={profileChipStyle}
+            label={"Rewards"}
+            {...rest}
           />
-          <StyledMenu
+          {/* <StyledMenu
             id="account-menu"
             aria-labelledby="account-button"
             anchorEl={anchorEl}
@@ -192,7 +202,7 @@ export const HeaderChip = ({
             }}
           >
             <MenuItem onClick={handleDisconnect} style={{ justifyContent: 'center' }}><LinkOff /> Disconnect</MenuItem>
-          </StyledMenu>
+          </StyledMenu> */}
         </>
         )
       }
