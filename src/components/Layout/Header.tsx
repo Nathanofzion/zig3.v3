@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Menu } from 'react-feather';
 import ProfileSection, { ActiveChainHeaderChip } from './ProfileSection';
+import { useTheme as nextUseTheme } from 'next-themes';
 
 const HeaderContainer = styled('div')`
   display: flex;
@@ -157,7 +158,13 @@ interface HeaderProps {
 
 export default function Header({ isDrawerOpen, setDrawerOpen }: HeaderProps) {
   const theme = useTheme();
+  const { resolvedTheme, setTheme } = nextUseTheme();
   const colorMode = React.useContext(ColorModeContext);
+
+  const changeTheme = () => {
+    colorMode.toggleColorMode();
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
+  }
 
   const router = useRouter();
   const { pathname } = router;
@@ -222,7 +229,7 @@ export default function Header({ isDrawerOpen, setDrawerOpen }: HeaderProps) {
               <ModeSwitch
                 sx={{ m: 1 }}
                 defaultChecked={theme.palette.mode === 'dark' ? true : false}
-                onChange={(e) => colorMode.toggleColorMode()}
+                onChange={changeTheme}
               />
               <AirdropButton style={{ marginRight: '8px' }} />
               <ProfileSection />

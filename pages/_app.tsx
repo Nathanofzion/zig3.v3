@@ -10,6 +10,8 @@ import store from '../src/state';
 import { theme } from '../src/themes';
 import '../styles/globals.css';
 import InkathonProvider from 'inkathon/InkathonProvider';
+import { ThemeProvider as NextThemeProvider } from 'next-themes'
+
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isConnectWalletModal, setConnectWalletModal] = useState<boolean>(false);
@@ -22,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [snackbarType, setSnackbarType] = useState<SnackbarIconType>(SnackbarIconType.SWAP);
 
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
+  
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -55,6 +58,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ColorModeContext.Provider value={colorMode}>
+         <NextThemeProvider attribute="class">
         <ThemeProvider theme={theme(mode)}>
           <CssBaseline />
           <MySorobanReactProvider>
@@ -68,6 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </InkathonProvider>
           </MySorobanReactProvider>
         </ThemeProvider>
+          </NextThemeProvider>
       </ColorModeContext.Provider>
     </Provider>
   );
