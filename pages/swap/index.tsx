@@ -29,9 +29,9 @@ export default function SwapPage() {
 
   return (
     <>
-      {/* <SEO title="Swap - Soroswap" description="Soroswap Swap" />
-      {xlmToken && <SwapComponent prefilledState={prefilledState} />} */}
-      <PlaygroundPage />
+      <SEO title="Swap - Soroswap" description="Soroswap Swap" />
+      {xlmToken && <PlaygroundPage />}
+      
     </>
   );
 }
