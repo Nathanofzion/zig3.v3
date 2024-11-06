@@ -1,5 +1,6 @@
 import { useSorobanReact } from '@soroban-react/core';
 import { SwapComponent } from 'components/Swap/SwapComponent';
+import PlaygroundPage from '@/app/playground/page';
 import { xlmTokenList } from 'constants/xlmToken';
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga';
@@ -35,7 +36,7 @@ export default function Home() {
   return (
     <>
       <SEO title="Zig3 V3" description="Zig3-Soroswap Index" data-testid="SEO" />
-      {xlmToken && <SwapComponent prefilledState={prefilledState} />}
+      {xlmToken && <PlaygroundPage />}
     </>
   );
 }

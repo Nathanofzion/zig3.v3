@@ -1,5 +1,7 @@
-import { ArrowDropDownSharp, LinkOff } from '@mui/icons-material';
-import { Box, Chip, Menu, MenuItem, MenuProps, useMediaQuery } from '@mui/material';
+import { useRouter } from 'next/navigation'
+
+import { ArrowDropDownSharp, Height, LinkOff } from '@mui/icons-material';
+import { Box, Button, Chip, Menu, MenuItem, MenuProps, useMediaQuery } from '@mui/material';
 import { alpha, styled, useTheme } from '@mui/material/styles';
 import { useInkathon } from '@scio-labs/use-inkathon';
 import { SorobanContextType, useSorobanReact } from '@soroban-react/core';
@@ -72,6 +74,7 @@ export const HeaderChip = ({
   canDisconnect?: boolean;
   disconnect?: () => void;
 }) => {
+  const router = useRouter();
   const theme = useTheme();
   const sorobanReact = useSorobanReact();
   const inkathon = useInkathon();
@@ -104,12 +107,15 @@ export const HeaderChip = ({
   const profileChipStyle = {
     display: 'flex',
     flexDirection: 'row',
-    height: isSmall ? 30 : 56,
-    padding: isSmall && canDisconnect ? '8px 1px 16px 1px' : isSmall ? '8px 16px' : '16px 24px',
+    height: isSmall ? 30 : "100%",
+    padding: isSmall && canDisconnect ? '8px 1px 16px 1px' : isSmall ? '17px' : '18px',
     justifyContent: 'center',
     alignItems: 'center',
     gap: 0.5,
+    cursor: 'pointer',
     flexShrink: 0,
+    fontWeight: 600,
+    textTransform: 'unset',
     borderRadius: isSmall ? '4px' : '16px',
     backgroundColor: '#00615F',
     '&[aria-controls="menu-list-grow"], &:hover': {
@@ -143,11 +149,18 @@ export const HeaderChip = ({
             <Chip
               onClick={handleDropdownClick}
               sx={profileChipStyle}
-              label={label}
+              label={"Rewards"}
               {...rest}
             />
+            {/* <Button
+              onClick={() => router.push('/reward')}
+              sx={profileChipStyle}
+              {...rest}
+            >
+              Reward
+            </Button> */}
 
-            <StyledMenu
+            {/* <StyledMenu
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -166,17 +179,24 @@ export const HeaderChip = ({
                 <MenuItem key={chain.id} onClick={() => changeActiveChain(chain)}>{chain.name}</MenuItem>
               ))
               }
-            </StyledMenu>
+            </StyledMenu> */}
           </>)
         :
         (<>
           <Chip
             onClick={canDisconnect ? handleDropdownClick : onClick}
             sx={profileChipStyle}
-            label={label}
+            label={"Rewards"}
             {...rest}
           />
-          <StyledMenu
+          {/* <Button
+            onClick={() => router.push('/reward')}
+            sx={profileChipStyle}
+            {...rest}
+          >
+            Reward
+          </Button> */}
+          {/* <StyledMenu
             id="account-menu"
             aria-labelledby="account-button"
             anchorEl={anchorEl}
@@ -192,7 +212,7 @@ export const HeaderChip = ({
             }}
           >
             <MenuItem onClick={handleDisconnect} style={{ justifyContent: 'center' }}><LinkOff /> Disconnect</MenuItem>
-          </StyledMenu>
+          </StyledMenu> */}
         </>
         )
       }

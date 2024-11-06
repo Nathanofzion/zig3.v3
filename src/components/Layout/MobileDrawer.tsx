@@ -5,6 +5,7 @@ import { ModeSwitch } from './Header';
 import { styled, useTheme } from '@mui/material';
 import { ColorModeContext } from 'contexts';
 import ProfileSection from './ProfileSection';
+import { useTheme as nextUseTheme } from 'next-themes';
 
 const titleStyle = {
   display: 'flex',
@@ -35,7 +36,13 @@ interface MobileDrawerProps {
 
 export default function MobileDrawer({ isDrawerOpen, setDrawerOpen }: MobileDrawerProps) {
   const theme = useTheme();
+  const { resolvedTheme, setTheme } = nextUseTheme();
   const colorMode = React.useContext(ColorModeContext);
+
+  const changeTheme = () => {
+    colorMode.toggleColorMode();
+    setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
+  }
 
   return (
     <Drawer
@@ -57,7 +64,7 @@ export default function MobileDrawer({ isDrawerOpen, setDrawerOpen }: MobileDraw
           <ModeSwitch
             sx={{ m: 1 }}
             defaultChecked={theme.palette.mode === 'dark' ? true : false}
-            onChange={(e) => colorMode.toggleColorMode()}
+            onChange={changeTheme}
           />
         </TitleDiv>
         <ProfileSection />

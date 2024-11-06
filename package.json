@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.ts\" \"pages/**/*.ts\"",
-    "wdio": "exec wdio run ./wdio.conf.ts --watch"
+    "wdio": "exec wdio run ./wdio.conf.ts --watch",
+    "postinstall": "yarn --cwd packages/tailwind-firebase-nextjs-referrel-system install"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -52,7 +53,9 @@
     "lodash-es": "^4.17.21",
     "luxon": "^3.4.4",
     "next": "14.0.4",
+    "next-themes": "^0.3.0",
     "npm": "^10.2.5",
+    "passkey-kit": "^0.6.1",
     "polished": "^4.2.2",
     "qs": "^6.11.2",
     "react": "18.2.0",
@@ -69,8 +72,7 @@
     "soroswap-router-sdk": "^1.2.4",
     "swr": "^2.2.0",
     "typescript": "5.3.3",
-    "use-resize-observer": "^9.1.0",
-    "passkey-kit": "^0.6.1"
+    "use-resize-observer": "^9.1.0"
   },
   "workspaces": [
     "packages/*"
