@@ -5,7 +5,6 @@ import { xlmTokenList } from 'constants/xlmToken';
 import { useEffect, useState } from 'react';
 import { Field } from 'state/swap/actions';
 import { SwapState } from 'state/swap/reducer';
-import PlaygroundPage from '../../packages/tailwind-firebase-nextjs-referrel-system/app/playground/page';
 
 export default function SwapPage() {
   const { activeChain } = useSorobanReact();
@@ -30,8 +29,7 @@ export default function SwapPage() {
   return (
     <>
       <SEO title="Swap - Soroswap" description="Soroswap Swap" />
-      {xlmToken && <PlaygroundPage />}
-      
+      {xlmToken && <SwapComponent prefilledState={prefilledState} />}
     </>
   );
 }

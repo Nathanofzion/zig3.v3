@@ -9,6 +9,9 @@ const config: Config = {
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'Darker Grotesque'].join(',')
+    },
     transparent: 'transparent',
     current: 'currentColor',
     extend: {
