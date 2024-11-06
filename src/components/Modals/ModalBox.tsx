@@ -6,8 +6,8 @@ import { Box } from '@mui/material';
 const ContentWrapper = styled(Box)`
   position: absolute;
   top: 50%;
-  right: 16px;
-  transform: translate(0, -50%);
+  left: 75%;
+  transform: translate(-50%, -50%);
 
   min-height: 100px;
   min-width: 200px;
@@ -34,6 +34,10 @@ const ContentWrapper = styled(Box)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.values.sm}px) {
     padding: 24px;
+    left: unset;
+    top: unset;
+    transform: unset;
+    bottom: 0;
   }
 `;
 

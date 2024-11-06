@@ -12,7 +12,7 @@ import { ButtonPrimary } from 'components/Buttons/Button';
 import { AlertCircle } from 'react-feather';
 
 import * as Bowser from 'bowser';
-import { isConnected } from '@stellar/freighter-api'; 
+import { isConnected } from '@stellar/freighter-api';
 import { isConnected as isConnectedLobstr } from '@lobstrco/signer-extension-api';
 
 import { Connector } from '@soroban-react/types';
@@ -50,7 +50,7 @@ const Info = styled('div')`
   }
 `;
 
-const ContentWrapper = styled('div')<{ isMobile: boolean }>`
+const ContentWrapper = styled('div') <{ isMobile: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -71,7 +71,7 @@ const WalletBox = styled('div')`
   align-self: stretch;
 `;
 
-const FooterText = styled('div')<{ isMobile: boolean }>`
+const FooterText = styled('div') <{ isMobile: boolean }>`
   opacity: 0.5;
   font-size: 12px;
   font-weight: 600;
@@ -106,14 +106,14 @@ const ConnectWalletContent = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const sorobanContext = useSorobanReact();
   const { setActiveConnectorAndConnect } = sorobanContext;
-  const [walletsStatus, setWalletsStatus] = 
-  useState<{ name: string; isInstalled: boolean; isLoading: boolean }[]>(
-    [
-      { name: 'freighter', isInstalled: false, isLoading: true },
-      { name: 'xbull', isInstalled: false, isLoading: true },
-      { name: 'lobstr', isInstalled: false, isLoading: true },
-    ]
-  );
+  const [walletsStatus, setWalletsStatus] =
+    useState<{ name: string; isInstalled: boolean; isLoading: boolean }[]>(
+      [
+        { name: 'freighter', isInstalled: false, isLoading: true },
+        { name: 'xbull', isInstalled: false, isLoading: true },
+        { name: 'lobstr', isInstalled: false, isLoading: true },
+      ]
+    );
   const browser = Bowser.getParser(window.navigator.userAgent).getBrowserName();
 
   const installWallet = (wallet: any) => {
@@ -129,7 +129,7 @@ const ConnectWalletContent = ({
           );
           break;
       }
-    } else if (wallet.id === 'xbull') { 
+    } else if (wallet.id === 'xbull') {
       switch (browser) {
         case 'Firefox':
           window.open('https://addons.mozilla.org/es/firefox/addon/xbull-wallet/', '_blank');
@@ -141,7 +141,7 @@ const ConnectWalletContent = ({
           );
           break;
       }
-    } else if (wallet.id === 'lobstr') { 
+    } else if (wallet.id === 'lobstr') {
       switch (browser) {
         default:
           window.open(
@@ -200,7 +200,7 @@ const ConnectWalletContent = ({
       // keyId.set(keyId_base64url);
       // contractId.set(cid);
     } catch (err) {
-       
+
     }
   }
 
@@ -216,7 +216,7 @@ const ConnectWalletContent = ({
         }
       }
       if (walletStatus.name === 'lobstr') {
-  
+
         const connected = await isConnectedLobstr();
 
         return { name: walletStatus.name, isInstalled: connected, isLoading: false };
@@ -244,15 +244,15 @@ const ConnectWalletContent = ({
                 (walletStatus) => walletStatus.name === wallet.id,
               );
               let walletIconUrl = theme.palette.mode == 'dark'
-              ? freighterLogoWhite.src
-              : freighterLogoBlack.src
-              if(wallet.id =='lobstr'){
+                ? freighterLogoWhite.src
+                : freighterLogoBlack.src
+              if (wallet.id == 'lobstr') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/lobstr.svg'
               }
-              else if(wallet.id =='freighter'){
+              else if (wallet.id == 'freighter') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/freighter.svg'
               }
-              else if(wallet.id =='xbull'){
+              else if (wallet.id == 'xbull') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/xbull.svg'
               }
 
@@ -288,6 +288,7 @@ const ConnectWalletContent = ({
                 />
                 <span>PasskeyID Wallet</span>
               </div>
+              <span style={{ color: theme.palette.custom.textQuaternary }}>Available</span>
             </WalletBox>
           </ContentWrapper>
           {/* TODO: add link to terms of service */}
@@ -309,15 +310,15 @@ const ConnectWalletContent = ({
                 (walletStatus) => walletStatus.name === wallet.id,
               );
               let walletIconUrl = theme.palette.mode == 'dark'
-              ? freighterLogoWhite.src
-              : freighterLogoBlack.src
-              if(wallet.id =='lobstr'){
+                ? freighterLogoWhite.src
+                : freighterLogoBlack.src
+              if (wallet.id == 'lobstr') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/lobstr.svg'
               }
-              else if(wallet.id =='freighter'){
+              else if (wallet.id == 'freighter') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/freighter.svg'
               }
-              else if(wallet.id =='xbull'){
+              else if (wallet.id == 'xbull') {
                 walletIconUrl = 'https://stellar.creit.tech/wallet-icons/xbull.svg'
               }
 
@@ -340,6 +341,19 @@ const ConnectWalletContent = ({
                 </WalletBox>
               );
             })}
+            <WalletBox onClick={handlePasskeyLogin}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Image
+                  src={passkeyImage.src}
+                  width={24}
+                  height={24}
+                  alt='passkey'
+                  style={{ borderRadius: 6 }}
+                />
+                <span>PasskeyID Wallet</span>
+              </div>
+              <span style={{ color: theme.palette.custom.textQuaternary }}>Available</span>
+            </WalletBox>
           </ContentWrapper>
           {/* TODO: add link to terms of service */}
           <FooterText isMobile={isMobile}>
