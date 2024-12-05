@@ -1,24 +1,26 @@
-import { useContext, useState, useEffect } from 'react';
+import * as Bowser from 'bowser';
+import { AppContext } from 'contexts';
+import Image from 'next/image';
+import { useContext, useEffect, useState } from 'react';
+import { AlertCircle } from 'react-feather';
 
+import { WebAuthn } from "@darkedges/capacitor-native-webauthn";
+import { isConnected as isConnectedLobstr } from '@lobstrco/signer-extension-api';
 import { Box, CircularProgress, Modal, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useSorobanReact } from '@soroban-react/core';
-import { AppContext } from 'contexts';
-import Image from 'next/image';
+import { Connector } from '@soroban-react/types';
+import { isConnected } from '@stellar/freighter-api';
+import { Keypair } from '@stellar/stellar-sdk';
+
+import { Capacitor } from '@capacitor/core';
+import base64url from 'base64url';
+import { ButtonPrimary } from 'components/Buttons/Button';
+import { handleDeploy } from 'lib/deploy';
+import { getPublicKeys } from 'lib/webauthn';
 import freighterLogoBlack from '../../assets/svg/FreighterWalletBlack.svg';
 import freighterLogoWhite from '../../assets/svg/FreighterWalletWhite.svg';
 import ModalBox from './ModalBox';
-import { ButtonPrimary } from 'components/Buttons/Button';
-import { AlertCircle } from 'react-feather';
-
-import * as Bowser from 'bowser';
-import { isConnected } from '@stellar/freighter-api';
-import { isConnected as isConnectedLobstr } from '@lobstrco/signer-extension-api';
-
-import { Connector } from '@soroban-react/types';
-
-import base64url from 'base64url';
-import { account, getContractId } from 'lib/passkeyClient';
 import passkeyImage from '/src/assets/images/passkey.png';
 
 const Title = styled('div')`
@@ -103,9 +105,7 @@ const ConnectWalletContent = ({
   const theme = useTheme();
   const { ConnectWalletModal } = useContext(AppContext);
   const { setConnectWalletModalOpen } = ConnectWalletModal;
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const sorobanContext = useSorobanReact();
-  const { setActiveConnectorAndConnect } = sorobanContext;
+  const { setActiveConnectorAndConnect } = useSorobanReact();
   const [walletsStatus, setWalletsStatus] =
     useState<{ name: string; isInstalled: boolean; isLoading: boolean }[]>(
       [
@@ -157,9 +157,8 @@ const ConnectWalletContent = ({
   };
 
   const connectWallet = async (wallet: Connector) => {
-    const connect = setActiveConnectorAndConnect && setActiveConnectorAndConnect(wallet);
     try {
-      await connect;
+      setActiveConnectorAndConnect?.(wallet);
       setConnectWalletModalOpen(false);
     } catch (err) {
       const errorMessage = `${err}`;
@@ -191,16 +190,42 @@ const ConnectWalletContent = ({
 
   const handlePasskeyLogin = async () => {
     try {
-      const { keyId: kid, contractId: cid } = await account.connectWallet({
-        getContractId,
+      const registerRes = await WebAuthn.startRegistration({
+        challenge: base64url("createchallenge"),
+        rp: {
+          id: Capacitor.isNativePlatform()
+            ? "passkey.sorobanbyexample.org"
+            : undefined,
+          name: "SoroPass",
+        },
+        user: {
+          id: base64url("Soroban Test"),
+          name: "Soroban Test",
+          displayName: "Soroban Test",
+        },
+        authenticatorSelection: {
+          requireResidentKey: false,
+          residentKey:
+            Capacitor.getPlatform() === "android"
+              ? "preferred"
+              : "discouraged",
+          userVerification: "discouraged",
+        },
+        pubKeyCredParams: [{ alg: -7, type: "public-key" }],
+        attestation: "none",
       });
 
-      const keyId_base64url = base64url(kid);
+      localStorage.setItem("sp:id", registerRes.id);
 
-      // keyId.set(keyId_base64url);
-      // contractId.set(cid);
+      const { contractSalt, publicKey } = await getPublicKeys(registerRes);
+
+      const bundlerKey = Keypair.random();
+      const deployee = await handleDeploy(bundlerKey, contractSalt, publicKey!);
+
+      console.log(deployee);
+      localStorage.setItem("sp:deployee", deployee);
     } catch (err) {
-
+      console.error(err);
     }
   }
 
@@ -403,8 +428,7 @@ const ErrorContent = ({
 
 export default function ConnectWalletModal() {
   const theme = useTheme();
-  const sorobanContext = useSorobanReact();
-  const supportedWallets = sorobanContext.connectors;
+  const { connectors: supportedWallets } = useSorobanReact();
   const { ConnectWalletModal } = useContext(AppContext);
   const { isConnectWalletModalOpen, setConnectWalletModalOpen } = ConnectWalletModal;
 
