@@ -1791,10 +1791,10 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.10.2.tgz"
   integrity sha512-hw437iINopmQuxWPSUEvqE56NCPsiU8N4AYtfHmJFckclktzK9YQJieD3XkDCDH4OjL+C7zgPUh73R/nrcHrqw==
 
-"@scio-labs/use-inkathon@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/@scio-labs/use-inkathon/-/use-inkathon-0.10.0.tgz"
-  integrity sha512-VZreei2wtY+MmG7QcmBJ9IAl5meeo99Se6XyCtmV4fdRw+AInpLFXGPYwJVVJy29QlG+7ZCp7AJISJpeAtfDhA==
+"@scio-labs/use-inkathon@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@scio-labs/use-inkathon/-/use-inkathon-0.11.0.tgz#05e760ad8538101f0de74051e82eee56786bddca"
+  integrity sha512-EAZ4QNzUa0pUYNY8Z7sFSWFtGMzWmGYFf5J+lDUskSascwoNpqVkmLauLPnqua/XCoF3t8eLDaKZNnrF+6JKDQ==
 
 "@scure/base@^1.1.1", "@scure/base@^1.1.5":
   version "1.1.6"
