@@ -24,7 +24,7 @@
     "@polkadot/api-contract": "^10.12.6",
     "@polkadot/types": "^10.12.6",
     "@reduxjs/toolkit": "^2.2.1",
-    "@scio-labs/use-inkathon": "^0.8.1",
+    "@scio-labs/use-inkathon": "^0.10.0",
     "@soroban-react/chains": "^9.1.13",
     "@soroban-react/contracts": "^9.3.0",
     "@soroban-react/core": "^9.3.0",
