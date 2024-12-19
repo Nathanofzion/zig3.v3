@@ -81,10 +81,16 @@ export const HeaderChip = ({
   const { setActiveChain } = sorobanReact;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { RewardsModal } = useContext(AppContext);
+  const { isRewardsModalOpen, setRewardsModalOpen } = RewardsModal;
 
   const handleDropdownClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);    
   };
+
+  const handleRewardsClick = () => {
+    setRewardsModalOpen(true);
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -147,9 +153,9 @@ export const HeaderChip = ({
         (
           <>
             <Chip
-              onClick={handleDropdownClick}
+              onClick={handleRewardsClick}
               sx={profileChipStyle}
-              label={"Rewards"}
+              label={label}
               {...rest}
             />
             {/* <Button
@@ -184,9 +190,9 @@ export const HeaderChip = ({
         :
         (<>
           <Chip
-            onClick={canDisconnect ? handleDropdownClick : onClick}
+            onClick={canDisconnect ? handleDropdownClick : handleRewardsClick}
             sx={profileChipStyle}
-            label={"Rewards"}
+            label={label}
             {...rest}
           />
           {/* <Button
@@ -227,9 +233,10 @@ export const ActiveChainHeaderChip = ({ isMobile }: { isMobile?: boolean }) => {
   return (
     <>
       {activeChain && chains && activeConnector?.id == 'xbull' && address ?
-        <HeaderChip label={[activeChain?.name, <ArrowDropDownSharp key={'action-icon'} className='MuiChip-action-icon' />]} isSmall={isMobile} chains={chains} />
+        // <HeaderChip label={[activeChain?.name, <ArrowDropDownSharp key={'action-icon'} className='MuiChip-action-icon' />]} isSmall={isMobile} chains={chains} />
+        <HeaderChip label={"Reward"} isSmall={isMobile} chains={chains} />
         :
-        <HeaderChip label={activeChain?.name} isSmall={isMobile} />
+        <HeaderChip label={"Reward"} isSmall={isMobile} />
       }
     </>
   );
@@ -238,9 +245,10 @@ export const ActiveChainHeaderChip = ({ isMobile }: { isMobile?: boolean }) => {
 export default function ProfileSection() {
   const { ConnectWalletModal } = useContext(AppContext);
   const sorobanContext: SorobanContextType = useSorobanReact();
+  console.log(sorobanContext.address);
   const theme = useTheme();
   const { setConnectWalletModalOpen } = ConnectWalletModal;
-  const isMobile = useMediaQuery(theme.breakpoints.down(1220));
+  const isMobile = useMediaQuery(theme.breakpoints.down(1220));  
 
   const handleClick = () => {
     setConnectWalletModalOpen(true);
