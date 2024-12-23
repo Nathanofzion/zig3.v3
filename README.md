@@ -40,9 +40,7 @@ Before you begin, ensure you have met the following requirements:
     NEXT_PUBLIC_BACKEND_URL=http://localhost:8010
     ```
     If you don't want to use the backend, you should also set the following variable:
-    ```bash
-    NEXT_PUBLIC_SOROSWAP_BACKEND_ENABLED=false
-    ```
+
     ```bash
     NEXT_PUBLIC_BACKEND_URL=https://api.soroswap.finance
    NEXT_PUBLIC_DEFAULT_NETWORK=testnet
