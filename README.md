@@ -43,6 +43,18 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     NEXT_PUBLIC_SOROSWAP_BACKEND_ENABLED=false
     ```
+    ```bash
+    NEXT_PUBLIC_BACKEND_URL=https://api.soroswap.finance
+   NEXT_PUBLIC_DEFAULT_NETWORK=testnet
+   NEXT_PUBLIC_SOROSWAP_BACKEND_API_KEY=false
+   NEXT_PUBLIC_SOROSWAP_BACKEND_ENABLED=false
+   NEXT_PUBLIC_SOROSWAP_BACKEND_URL=https://backend.soroswap.finance
+   NEXT_PUBLIC_TAG_ID=
+   NEXT_PUBLIC_TEST_TOKENS_ADMIN_SECRET_KEY=SAPG6EGSLVPSVR6TXNWJOYDA2BBIK3MNOHIHSX6M36WAJTQCP2G2DJYO
+   NEXT_PUBLIC_TRUSTLINE_WALLET_PUBLIC_KEY=
+   NEXT_PUBLIC_AGGREGATOR_ENABLED=false
+   NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-testnet.stellar.org
+   ```
 
     Also, the variable `NEXT_PUBLIC_TEST_TOKENS_ADMIN_SECRET_KEY` should be the same as the one that deployed the tokens in the `core` repository.
 
@@ -50,19 +62,8 @@ Before you begin, ensure you have met the following requirements:
 
     ```bash
     cp .env.production.example .env
-    NEXT_PUBLIC_BACKEND_URL=https://api.soroswap.finance
-NEXT_PUBLIC_DEFAULT_NETWORK=testnet
-NEXT_PUBLIC_SOROSWAP_BACKEND_API_KEY=false
-NEXT_PUBLIC_SOROSWAP_BACKEND_ENABLED=false
-NEXT_PUBLIC_SOROSWAP_BACKEND_URL=https://backend.soroswap.finance
-NEXT_PUBLIC_TAG_ID=
-NEXT_PUBLIC_TEST_TOKENS_ADMIN_SECRET_KEY=SAPG6EGSLVPSVR6TXNWJOYDA2BBIK3MNOHIHSX6M36WAJTQCP2G2DJYO
-NEXT_PUBLIC_TRUSTLINE_WALLET_PUBLIC_KEY=
-NEXT_PUBLIC_AGGREGATOR_ENABLED=false
-NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-testnet.stellar.org
     ```
-
-    copy and paste code block below to get started straight away:
+   
 
     ❗️❗️ Note that some Futurenet RPC's might not have the same version, so we recomend you to connect to a local quickstart node following the instructions in `https://github.com/soroswap/core`; and setting up your Freighter Wallet as in step 6.
 
