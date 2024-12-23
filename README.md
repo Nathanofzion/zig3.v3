@@ -13,9 +13,8 @@ Before you begin, ensure you have met the following requirements:
 
     ```bash
 
-    git clone https://github.com/Nathanofzion/Zig3-Soroswap.git
-    (if your not in the root)
-    cd Zig3-Soroswap
+    git clone https://github.com/Nathanofzion/zig3.v3.git
+
     ```
 
 2. Set Up Environment Variables
@@ -34,6 +33,8 @@ Before you begin, ensure you have met the following requirements:
     - the SoroswapRouter address
     - the admin key for token minting
 
+
+
     If you are following the instructions in `https://github.com/soroswap/core` in order to deploy the smart contacts in your local environment and serve the API. you should have:
     ```bash
     NEXT_PUBLIC_BACKEND_URL=http://localhost:8010
@@ -50,6 +51,20 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     cp .env.production.example .env
     ```
+
+    copy and paste code block below to get started straight away:
+
+NEXT_PUBLIC_BACKEND_URL=https://api.soroswap.finance
+NEXT_PUBLIC_DEFAULT_NETWORK=testnet
+NEXT_PUBLIC_SOROSWAP_BACKEND_API_KEY=false
+NEXT_PUBLIC_SOROSWAP_BACKEND_ENABLED=false
+NEXT_PUBLIC_SOROSWAP_BACKEND_URL=https://backend.soroswap.finance
+NEXT_PUBLIC_TAG_ID=
+NEXT_PUBLIC_TEST_TOKENS_ADMIN_SECRET_KEY=SAPG6EGSLVPSVR6TXNWJOYDA2BBIK3MNOHIHSX6M36WAJTQCP2G2DJYO
+NEXT_PUBLIC_TRUSTLINE_WALLET_PUBLIC_KEY=
+NEXT_PUBLIC_AGGREGATOR_ENABLED=false
+NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-testnet.stellar.org
+
 
     ❗️❗️ Note that some Futurenet RPC's might not have the same version, so we recomend you to connect to a local quickstart node following the instructions in `https://github.com/soroswap/core`; and setting up your Freighter Wallet as in step 6.
 
