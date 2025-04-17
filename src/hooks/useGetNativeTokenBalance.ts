@@ -1,7 +1,7 @@
 import { SorobanContextType, useSorobanReact } from '@soroban-react/core';
-import { tokenBalance } from './useBalances';
 import useSWRImmutable from 'swr/immutable';
 import nativeTokens from '../../public/native_tokens.json';
+import { tokenBalance } from './useBalances';
 
 interface FetchBalanceProps {
   sorobanContext: SorobanContextType;
@@ -21,14 +21,16 @@ const fetchBalance = async ({ sorobanContext, address }: FetchBalanceProps) => {
 
   try {
     await sorobanContext.server?.getAccount(address);
-  } catch (error) {
+  } catch (err: any) {
+    console.error('getAccount =>', err.message);
     return { data: 0, validAccount: false };
   }
 
   try {
     const balance = await tokenBalance(networkNativeToken.address, address, sorobanContext);
     return { data: balance, validAccount: true };
-  } catch (error) {
+  } catch (err: any) {
+    console.error('tokenBalance =>', err.message);
     return { data: 0, validAccount: true };
   }
 };
@@ -37,9 +39,9 @@ const useGetNativeTokenBalance = () => {
   const sorobanContext = useSorobanReact();
   const { address } = sorobanContext;
 
-  const { data, isLoading, mutate, error } = useSWRImmutable(
-    ['native-balance', sorobanContext, address],
-    ([key, sorobanContext, address]) => fetchBalance({ sorobanContext, address }),
+  const { data, error, isLoading, mutate } = useSWRImmutable(
+    address ? ['native-balance', sorobanContext, address] : null,
+    ([key, sorobanContext, address]) => fetchBalance({ sorobanContext, address })
   );
 
   return {

@@ -15,7 +15,7 @@ import { ThemeProvider as NextThemeProvider } from 'next-themes'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isConnectWalletModal, setConnectWalletModal] = useState<boolean>(false);
-
+  const [isRewardsModalOpen, setRewardsModalOpen] = useState(false);
   const [maxHops, setMaxHops] = useState<number>(2);
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -38,6 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
     ConnectWalletModal: {
       isConnectWalletModalOpen: isConnectWalletModal,
       setConnectWalletModalOpen: setConnectWalletModal,
+    },
+    RewardsModal : {
+      isRewardsModalOpen: isRewardsModalOpen,
+      setRewardsModalOpen: setRewardsModalOpen,
     },
     SnackbarContext: {
       openSnackbar,
