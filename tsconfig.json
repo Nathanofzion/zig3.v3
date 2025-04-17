@@ -16,6 +16,9 @@
     "jsx": "preserve",
     "incremental": true,
     "downlevelIteration": true,
+    "paths": {
+      "@/*": ["../packages/tailwind-firebase-nextjs-referrel-system/*"]
+    },
     "types": [
       "node",
       "@wdio/globals/types",
@@ -33,5 +36,6 @@
     "next.config.js",
     "next.config.cjs"
   ],
+  "extends": "./packages/tailwind-firebase-nextjs-referrel-system/tsconfig.json",
   "exclude": ["node_modules"]
 }

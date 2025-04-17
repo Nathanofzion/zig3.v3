@@ -9,6 +9,7 @@ import background1 from '../../assets/images/bg1.png';
 import Header from './Header';
 import MobileDrawer from './MobileDrawer';
 import Banner from './Banner';
+import RewardsModal from 'components/Modals/RewardsModal';
 
 const MainBackground = styled('main') <{ isMobile: boolean; showBanner: boolean }>`
   background-size: cover;
@@ -47,7 +48,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <Header isDrawerOpen={isDrawerOpen} setDrawerOpen={setDrawerOpen} />
         </Toolbar>
       </AppBar>
-
+      <RewardsModal />
       <ConnectWalletModal />
       <SnackbarNotification />
 

@@ -5,6 +5,11 @@ type ConnectWalletModalType = {
   setConnectWalletModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type RewardsModalType = {
+  isRewardsModalOpen: boolean;
+  setRewardsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export enum SnackbarIconType {
   MINT,
   SWAP,
@@ -31,6 +36,7 @@ export type Settings = {
 
 export type AppContextType = {
   ConnectWalletModal: ConnectWalletModalType;
+  RewardsModal: RewardsModalType;
   SnackbarContext: SnackbarContextType;
   Settings: Settings;
 };
@@ -44,6 +50,11 @@ export const AppContext = React.createContext<AppContextType>({
     isConnectWalletModalOpen: false,
     setConnectWalletModalOpen: () => {},
   },
+  RewardsModal: {
+    isRewardsModalOpen: false,
+    setRewardsModalOpen: () => {},
+  },
+
   SnackbarContext: {
     openSnackbar: false,
     snackbarMessage: '',

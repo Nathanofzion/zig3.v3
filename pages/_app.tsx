@@ -10,10 +10,12 @@ import store from '../src/state';
 import { theme } from '../src/themes';
 import '../styles/globals.css';
 import InkathonProvider from 'inkathon/InkathonProvider';
+import { ThemeProvider as NextThemeProvider } from 'next-themes'
+
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isConnectWalletModal, setConnectWalletModal] = useState<boolean>(false);
-
+  const [isRewardsModalOpen, setRewardsModalOpen] = useState(false);
   const [maxHops, setMaxHops] = useState<number>(2);
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -22,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [snackbarType, setSnackbarType] = useState<SnackbarIconType>(SnackbarIconType.SWAP);
 
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -35,6 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
     ConnectWalletModal: {
       isConnectWalletModalOpen: isConnectWalletModal,
       setConnectWalletModalOpen: setConnectWalletModal,
+    },
+    RewardsModal : {
+      isRewardsModalOpen: isRewardsModalOpen,
+      setRewardsModalOpen: setRewardsModalOpen,
     },
     SnackbarContext: {
       openSnackbar,
@@ -55,19 +62,21 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme(mode)}>
-          <CssBaseline />
-          <MySorobanReactProvider>
-            <InkathonProvider>
-              <AppContext.Provider value={appContextValues}>
-                <MainLayout>
-                  <Component {...pageProps} />
-                  <Analytics />
-                </MainLayout>
-              </AppContext.Provider>
-            </InkathonProvider>
-          </MySorobanReactProvider>
-        </ThemeProvider>
+        <NextThemeProvider attribute="class">
+          <ThemeProvider theme={theme(mode)}>
+            <CssBaseline />
+            <MySorobanReactProvider>
+              <InkathonProvider>
+                <AppContext.Provider value={appContextValues}>
+                  <MainLayout>
+                    <Component {...pageProps} />
+                    <Analytics />
+                  </MainLayout>
+                </AppContext.Provider>
+              </InkathonProvider>
+            </MySorobanReactProvider>
+          </ThemeProvider>
+        </NextThemeProvider>
       </ColorModeContext.Provider>
     </Provider>
   );
